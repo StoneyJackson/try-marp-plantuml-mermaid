@@ -1,0 +1,27 @@
+@startuml canister-1-init
+!include_many canister.iuml
+Hide Local
+Hide Origin
+Hide Upstream
+@enduml
+
+@startuml canister-2-upstream
+!include_many canister.iuml
+Hide Local
+Hide Origin
+@enduml
+
+@startuml canister-3-fork
+!include_many canister.iuml
+Hide Local
+@enduml
+
+@startuml canister-4-clone
+!include_many canister.iuml
+@enduml
+
+@startuml canister-5-ready
+!$show_fork_operation="false"
+!$show_clone_operation="false"
+!include_many canister.iuml
+@enduml
