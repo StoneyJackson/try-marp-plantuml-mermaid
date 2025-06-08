@@ -17,6 +17,10 @@ style: |
   }
 ---
 
+# GitKit Chapter 2
+
+---
+
 ## Context
 
 <div class="columns">

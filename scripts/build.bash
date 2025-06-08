@@ -7,7 +7,7 @@ ME=$(basename "$0")
 info() {
     f=$1
     shift
-    >&2 echo "[  INFO  ] $ME:$f(): $*"
+    >&2 echo "[  INFO ] $ME:$f(): $*"
 }
 
 
