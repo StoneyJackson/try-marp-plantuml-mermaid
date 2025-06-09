@@ -5,7 +5,7 @@ ME=$(basename "$0")
 
 
 info() {
-    f=$1
+    local f=$1
     shift
     >&2 echo "[  INFO ] $ME:$f(): $*"
 }
@@ -15,9 +15,19 @@ main() {
     info $FUNCNAME "Building the project..."
     mkdir -p build
     cp -R slides build
-    build-plantuml
-    build-marp
+    build-mermaid
+    # build-plantuml
+    # build-marp
     info $FUNCNAME "Build completed successfully."
+}
+
+
+build-mermaid() {
+    info $FUNCNAME "Building SVG diagrams..."
+    for f in $(find build -type f -name "*.mmd" -o -name "*.md"); do
+        info $FUNCNAME "Processing: $f"
+        bin/mmdc -i "$f" -o "${f%.*}.svg"
+    done
 }
 
 
@@ -28,6 +38,7 @@ build-plantuml() {
         bin/plantuml -failfast -tsvg "/data/build/$d"
     done
 }
+
 
 
 build-marp() {
