@@ -1,0 +1,32 @@
+' A sequence of PlantUML diagrams that illustrate
+' forking and cloning a GitHub repository.
+
+@startuml fork-clone-1-github
+    !$theme = "plain"
+    !include_many fork_clone_diagram.iuml
+    $fork_clone_diagram($hide_dev_environment="true",$hide_origin="true")
+@enduml
+
+
+@startuml fork-clone-2-fork
+    !include_many fork_clone_diagram.iuml
+    $fork_clone_diagram($hide_dev_environment="true")
+@enduml
+
+
+@startuml fork-clone-3-devenv
+    !include_many fork_clone_diagram.iuml
+    $fork_clone_diagram($hide_local="true")
+@enduml
+
+
+@startuml fork-clone-4-clone
+    !include_many fork_clone_diagram.iuml
+    $fork_clone_diagram()
+@enduml
+
+
+@startuml fork-clone-5-ready
+    !include_many fork_clone_diagram.iuml
+    $fork_clone_diagram($hide_fork_operation="true", $hide_clone_operation="true")
+@enduml

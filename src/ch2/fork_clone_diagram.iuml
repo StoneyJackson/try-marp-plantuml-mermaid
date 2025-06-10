@@ -1,0 +1,48 @@
+!theme bluegray
+!procedure $fork_clone_diagram($hide_dev_environment="false", $hide_local="false", $hide_origin="false", $hide_upstream="false", $hide_upstream_link="true", $hide_fork_operation="false", $hide_clone_operation="false")
+
+    package GitHub {
+        database Origin
+        database Upstream
+    }
+    package "Dev Environment" as Computer {
+        database Local
+    }
+
+    !if ($hide_fork_operation == "true")
+        Origin <-[hidden;thickness=6] Upstream : Fork
+    !else
+        Origin <-[thickness=6] Upstream : Fork
+    !endif
+    Origin ~> Upstream : forked from (link)
+
+    !if ($hide_clone_operation == "true")
+        Origin -[hidden;thickness=6]-> Local : Clone
+    !else
+        Origin -[thickness=6]-> Local : Clone
+    !endif
+    Origin <~~ Local : origin (link)
+
+    !if ($hide_upstream_link == "true")
+        Upstream <~[hidden]~ Local : upstream (link)
+    !else
+        Upstream <~~ Local : upstream (link)
+    !endif
+
+    !if ($hide_dev_environment == "true")
+        Hide Computer
+    !endif
+
+    !if ($hide_local == "true")
+        Hide Local
+    !endif
+
+    !if ($hide_origin == "true")
+        Hide Origin
+    !endif
+
+    !if ($hide_upstream == "true")
+        Hide Upstream
+    !endif
+
+!endprocedure

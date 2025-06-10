@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 set -euo pipefail
 ME=$(basename "$0")
 
@@ -12,18 +13,30 @@ info() {
 
 
 main() {
-    info $FUNCNAME "Building the project..."
-    mkdir -p build
-    cp -R slides build
+    info $FUNCNAME "Starting build process..."
+    info $FUNCNAME "Cleaning up previous build..."
+    clean-previous
+    info $FUNCNAME "Copying src into build..."
+    copy-src
+    info $FUNCNAME "Build Mermaid images..."
     build-mermaid
-    # build-plantuml
-    # build-marp
+    info $FUNCNAME "Build PlantUML images..."
+    build-plantuml
+    info $FUNCNAME "Build Marp slides..."
+    build-marp
     info $FUNCNAME "Build completed successfully."
 }
 
+clean-previous() {
+    rm -rf build
+}
+
+copy-src() {
+    mkdir -p build
+    cp -r src/. build/
+}
 
 build-mermaid() {
-    info $FUNCNAME "Building SVG diagrams..."
     for f in $(find build -type f -name "*.mmd" -o -name "*.md"); do
         info $FUNCNAME "Processing: $f"
         bin/mmdc -i "$f" -o "${f%.*}.svg"
@@ -32,24 +45,17 @@ build-mermaid() {
 
 
 build-plantuml() {
-    info $FUNCNAME "Building SVG diagrams..."
-    for d in $(find slides -type d); do
+    for d in $(find build -type d); do
         info $FUNCNAME "Processing: $d/"
-        bin/plantuml -failfast -tsvg "/data/build/$d"
+        bin/plantuml -failfast -tsvg "$d"
     done
 }
 
 
-
 build-marp() {
-    info $FUNCNAME "Building HTML slides..."
     bin/marp -I "/home/marp/app/build"
-
-    info $FUNCNAME "Building PDF slides..."
-    bin/marp -I "/home/marp/app/build" --pdf
-
-    info $FUNCNAME "Building PPTX slides..."
-    bin/marp -I "/home/marp/app/build" --pptx
+    # bin/marp -I "/home/marp/app/build" --pdf
+    # bin/marp -I "/home/marp/app/build" --pptx
 }
 
 
