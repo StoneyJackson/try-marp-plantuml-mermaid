@@ -1,0 +1,5 @@
+@startuml
+package MermaidInPlantUml [
+    <img:test-mermaid.png>
+]
+@enduml

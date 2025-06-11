@@ -7,7 +7,9 @@
 		"vscode": {
 			"extensions": [
 				"ritwickdey.LiveServer",
-				"marp-team.marp-vscode"
+				"marp-team.marp-vscode",
+				"wholroyd.jinja",
+				"samuelcolvin.jinjahtml"
 			]
 		}
 	}
