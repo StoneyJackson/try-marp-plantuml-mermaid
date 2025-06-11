@@ -12,5 +12,8 @@
 				"samuelcolvin.jinjahtml"
 			]
 		}
+	},
+	"remoteEnv": {
+        "PATH": "${PATH}:${workspaceFolder}/.devcontainer/builder/scripts"
 	}
 }
