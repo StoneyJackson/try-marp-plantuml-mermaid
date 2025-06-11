@@ -6,8 +6,8 @@
     hide_origin=False,
     hide_upstream=False,
     hide_dev_environment=False,
-    theme="bluegray")
-%}
+    theme="bluegray"
+) %}
 
     !theme {{ theme }}
 
@@ -25,6 +25,7 @@
     {% else %}
         Origin <-[thickness=6] Upstream : Fork
     {% endif %}
+    
     Origin ~> Upstream : forked from (link)
 
 
@@ -33,6 +34,7 @@
     {% else %}
         Origin -[thickness=6]-> Local : Clone
     {% endif %}
+
     Origin <~~ Local : origin (link)
 
     {% if hide_upstream_link %}
@@ -57,4 +59,4 @@
         Hide Upstream
     {% endif %}
 
-{% endmacro %}
+{%- endmacro %}
