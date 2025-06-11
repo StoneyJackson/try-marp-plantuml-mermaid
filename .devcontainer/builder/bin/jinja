@@ -4,6 +4,6 @@ if docker images | grep -q jinja2; then
     >&2 echo "Using cached jinja2 image"
 else
     >&2 echo "Building jinja2 image"
-    docker build lib/jinja2 -t jinja2
+    docker build "${LIB_DIR}/jinja2" -t jinja2
 fi
 docker run --rm -u "$(id -u):$(id -g)" -v "${PWD}:/data" jinja2 "$@"
