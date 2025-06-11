@@ -1,32 +1,26 @@
-' A sequence of PlantUML diagrams that illustrate
-' forking and cloning a GitHub repository.
+{% include "fork_clone_diagram.jinja" as fork_clone_diagram %}
+
 
 @startuml fork-clone-1-github
-    !$theme = "plain"
-    !include_many fork_clone_diagram.iuml
-    $fork_clone_diagram($hide_dev_environment="true",$hide_origin="true")
+{% fork_clone_diagram.build(theme="plain", hide_dev_environment=True, hide_origin=True) %}
 @enduml
 
 
 @startuml fork-clone-2-fork
-    !include_many fork_clone_diagram.iuml
-    $fork_clone_diagram($hide_dev_environment="true")
+{% fork_clone_diagram.build(hide_dev_environment=True) %}
 @enduml
 
 
 @startuml fork-clone-3-devenv
-    !include_many fork_clone_diagram.iuml
-    $fork_clone_diagram($hide_local="true")
+{% fork_clone_diagram.build(hide_local=True) %}
 @enduml
 
 
 @startuml fork-clone-4-clone
-    !include_many fork_clone_diagram.iuml
-    $fork_clone_diagram()
+{% fork_clone_diagram() %}
 @enduml
 
 
 @startuml fork-clone-5-ready
-    !include_many fork_clone_diagram.iuml
-    $fork_clone_diagram($hide_fork_operation="true", $hide_clone_operation="true")
+{% fork_clone_diagram(hide_fork_operation=true, hide_clone_operation=true) %}
 @enduml

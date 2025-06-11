@@ -1,0 +1,60 @@
+{% macro build(
+    hide_fork_operation=False,
+    hide_clone_operation=False,
+    hide_upstream_link=True,
+    hide_local=False,
+    hide_origin=False,
+    hide_upstream=False,
+    hide_dev_environment=False,
+    theme="bluegray")
+%}
+
+    !theme {{ theme }}
+
+    package GitHub {
+        database Origin
+        database Upstream
+    }
+
+    package "Dev Environment" as Computer {
+        database Local
+    }
+
+    {% if hide_fork_operation %}
+        Origin <-[hidden;thickness=6] Upstream : Fork
+    {% else %}
+        Origin <-[thickness=6] Upstream : Fork
+    {% endif %}
+    Origin ~> Upstream : forked from (link)
+
+
+    {% if hide_clone_operation %}
+        Origin -[hidden;thickness=6]-> Local : Clone
+    {% else %}
+        Origin -[thickness=6]-> Local : Clone
+    {% endif %}
+    Origin <~~ Local : origin (link)
+
+    {% if hide_upstream_link %}
+        Upstream <~[hidden]~ Local : upstream (link)
+    {% else %}
+        Upstream <~~ Local : upstream (link)
+    {% endif %}
+
+    {% if hide_dev_environment %}
+        Hide Computer
+    {% endif %}
+
+    {% if hide_local %}
+        Hide Local
+    {% endif %}
+
+    {% if hide_origin %}
+        Hide Origin
+    {% endif %}
+
+    {% if hide_upstream %}
+        Hide Upstream
+    {% endif %}
+
+{% endmacro %}

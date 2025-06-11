@@ -18,7 +18,6 @@ style: |
 
 ---
 
-
 # GitHub
 
 - GitHub
@@ -90,3 +89,9 @@ style: |
 You're ready to find something to work on!
 
 ![bg right:60% width:100%](fork-clone-5-ready.svg)
+
+---
+
+# Making Changes
+
+![bg right:60% width:100%](changes-1-setup.svg)
