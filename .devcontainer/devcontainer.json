@@ -14,6 +14,6 @@
 		}
 	},
 	"remoteEnv": {
-        "PATH": "${PATH}:${workspaceFolder}/.devcontainer/builder/scripts"
+        	"PATH": "${containerEnv:PATH}:${workspaceFolder}/.devcontainer/builder/scripts"
 	}
 }
