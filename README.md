@@ -2,7 +2,7 @@
 
 This project provides a dev container that integrates the tools below to generate diagrams and presentations from text.
 
-* [PlanUML](https://plantuml.com/) - Text-base diagraming tool.
+* [PlantUML](https://plantuml.com/) - Text-base diagraming tool.
 * [Mermaid](https://mermaid.js.org/) - Text-base diagraming tool.
 * [Marp](https://marp.app/) - Markdown presentation ecosystem
 * [Jinja](https://jinja.palletsprojects.com/en/stable/) - Templating engine.
