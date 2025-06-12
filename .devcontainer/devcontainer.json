@@ -9,8 +9,14 @@
 				"ritwickdey.LiveServer",
 				"marp-team.marp-vscode",
 				"wholroyd.jinja",
-				"samuelcolvin.jinjahtml"
-			]
+				"samuelcolvin.jinjahtml",
+				"jebbs.plantuml",
+				"bierner.markdown-mermaid"
+			],
+			"settings": {
+				"plantuml.render": "PlantUMLServer",
+    			"plantuml.server": "https://www.plantuml.com/plantuml"
+			}
 		}
 	},
 	"remoteEnv": {
