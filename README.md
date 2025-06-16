@@ -2,10 +2,11 @@
 
 This project provides a dev container that integrates the tools below to generate diagrams and presentations from text.
 
-* [PlantUML](https://plantuml.com/) - Text-base diagraming tool.
+* [Jinja](https://jinja.palletsprojects.com/en/stable/) - Templating engine.
 * [Mermaid](https://mermaid.js.org/) - Text-base diagraming tool.
 * [Marp](https://marp.app/) - Markdown presentation ecosystem
-* [Jinja](https://jinja.palletsprojects.com/en/stable/) - Templating engine.
+* [PlantUML](https://plantuml.com/) - Text-base diagraming tool.
+
 
 ## 1. Try it
 
@@ -53,6 +54,23 @@ You can always rebuild it from src. But when you are ready to deploy what you bu
 2. Rename it, then commit it.
 3. Move it into a directory that is not ignored by git, then commit it.
 4. Rmeove `build/` from .gitignore, then commit it.
+
+
+## `build.bash`
+
+`build.bash` does the following in order.
+
+```mermaid
+flowchart LR
+    Reset --> Jinja --> Mermaid --> PlantUML --> Marp
+```
+
+1. **Reset:** Empty `build/` and then copy the contents of `src/` into `build/`.
+2. **Jinja:** Run jinja on `*.j2` files in `build/`. Each file produces a file whose name is the same as the original file with the `.j2` extension removed. For example, `file.md.j2` produces `file.md`.
+3. **Mermaid:** Run mermaid on `*.md` files that contain `mermaid: true`. Each diagram block in `file.md` produces a PNG file: `file.md-1.png`, `file.md-2.png`, etc.
+4. **PlantUML:** Run plantuml on `*.md` files that contain `plantuml: true`. Each diagram block in `file.md` produces an SVG file. PlantUML has a vaguely defined number sequence for output file names (<https://plantuml.com/sources#:~:text=File%20naming,t%20match%20the%20output%20format.>). Instead of releying on those, we recommend naming each diagram: e.g., `@startuml name` produces `name.svg`.
+5. **Marp:** Run marp on `*.md` files that contain `marp: true`. For each `file.md` produces `file.html`.
+
 
 ## Quick PlantUML
 
@@ -156,4 +174,5 @@ Hello, World
 ```
 
 `*.j2` files that start with underscore `_` will not processed by Jinja directly, and so do not generate a separate file.
+
 

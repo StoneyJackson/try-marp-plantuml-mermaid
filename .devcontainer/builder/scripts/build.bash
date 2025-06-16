@@ -47,23 +47,26 @@ copy-src() {
 
 
 build-jinja() {
-    # Process all Jinja2 templates and Markdown files in the build directory
-    # but not any file that starts with an underscore
-    for f in $(find "${BUILD_DIR}" -type f -name "*.j2" ! -name "_*"); do
+    for f in $(find "${BUILD_DIR}" -type f -name "*.j2"); do
         info $FUNCNAME "Processing: $f"
         f="${f#$PROJ_ROOT/}"
         jinja "$f" -o "${f%.*}"
     done
 }
 
+
 jinja() {
     "${BIN_DIR}/jinja" "$@"
 }
 
+
 build-mermaid() {
-    for f in $(find build -type f -name "*.mmd" -o -name "*.md"); do
-        info $FUNCNAME "Processing: $f"
-        mermaid -i "$f" -o "${f%.*}.png"
+    for f in $(find "${BUILD_DIR}" -type f -name "*.md"); do
+        if cat "$f" | grep 'mermaid: true' ; then
+            f="build/${f#${BUILD_DIR}/}"
+            info $FUNCNAME "Processing: $f"
+            mermaid -i "$f" --outputFormat png
+        fi
     done
 }
 
@@ -74,9 +77,12 @@ mermaid() {
 
 
 build-plantuml() {
-    for d in $(find "${BUILD_DIR}" -type d); do
-        info $FUNCNAME "Processing: $d/"
-        plantuml -failfast -tsvg "${d#$PROJ_ROOT/}"
+    for f in $(find "${BUILD_DIR}" -type f -name "*.md"); do
+        if cat "$f" | grep 'plantuml: true' ; then
+            f="build/${f#${BUILD_DIR}/}"
+            info $FUNCNAME "Processing: $f"
+            plantuml -failfast -tsvg "${f}"
+        fi
     done
 }
 
@@ -87,7 +93,13 @@ plantuml() {
 
 
 build-marp() {
-    marp -I "/home/marp/app/build"
+    for f in $(find "${BUILD_DIR}" -type f -name "*.md"); do
+        if cat "$f" | grep 'marp: true' ; then
+            f="build/${f#${BUILD_DIR}/}"
+            info $FUNCNAME "Processing: $f"
+            marp "$f"
+        fi
+    done
     # marp -I "/home/marp/app/build" --pdf
     # marp -I "/home/marp/app/build" --pptx
 }

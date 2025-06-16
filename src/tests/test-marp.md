@@ -8,7 +8,7 @@ marp: true
 
 # Mermaid Test
 
-![](test-mermaid.png)
+![](test-mermaid.md-1.png)
 
 ---
 

@@ -1,6 +1,9 @@
-{% import "_fork_clone_macro.j2" as diagram %}
+---
+plantuml: true
+---
+{% import "fork_clone.jinja" as diagram %}
 
-
+```plantuml
 @startuml fork-clone-1-github
 {{
     diagram.build(
@@ -10,8 +13,9 @@
     )
 }}
 @enduml
+```
 
-
+```plantuml
 @startuml fork-clone-2-fork
 {{
     diagram.build(
@@ -19,8 +23,9 @@
     )
 }}
 @enduml
+```
 
-
+```plantuml
 @startuml fork-clone-3-devenv
 {{
     diagram.build(
@@ -28,15 +33,17 @@
     )
 }}
 @enduml
+```
 
-
+```plantuml
 @startuml fork-clone-4-clone
 {{
     diagram.build()
 }}
 @enduml
+```
 
-
+```plantuml
 @startuml fork-clone-5-ready
 {{
     diagram.build(
@@ -45,3 +52,4 @@
     )
 }}
 @enduml
+```
